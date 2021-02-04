@@ -93,13 +93,16 @@
           }
         });
 
-        $("#sendButton").on("click", ()=> 
+        $("#sendButton").on("click", (event)=> 
         {
-          let contact = new core.Contact(fullName.value, contactNumber.value, emailAddress.value);
-
-          if(contact.serialize())
+          if($("#subscribeCheckbox")[0].checked)
           {
-            localStorage.setItem((localStorage.length + 1).toString(), contact.serialize());
+            let contact = new core.Contact(fullName.value, contactNumber.value, emailAddress.value);
+
+            if(contact.serialize())
+            {
+              localStorage.setItem((localStorage.length + 1).toString(), contact.serialize());
+            }
           }
         });
     }
