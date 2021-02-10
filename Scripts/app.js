@@ -211,7 +211,6 @@
       }
     }
 
-    //TODO: Need Form Validation
     function displayEdit()
     {
       let key = location.hash.substring(1);
@@ -262,14 +261,22 @@
         location.href = "contact-list.html";
       });
 
-      //TODO: make this page more versatile so that it can act as an Add page as well
-
       $("#cancelButton").on("click", function()
       {
         // return to the contact-list page
         location.href = "contact-list.html";
       });
       
+    }
+
+    function displayLogin()
+    {
+
+    }
+
+    function displayRegister()
+    {
+
     }
      
 
@@ -296,10 +303,17 @@
             break;
           case "Contact-List":
             displayContactList();
+            break;
           case "Edit":
             displayEdit();
             break;
+          case "Login":
+            displayLogin();
           break;
+          case "Register":
+            displayRegister();
+          break;
+          
         }
         
     }
