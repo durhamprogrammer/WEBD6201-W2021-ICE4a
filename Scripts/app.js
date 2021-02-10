@@ -75,23 +75,74 @@
 
     }
 
+    function testFullName()
+    {
+      let fullNamePattern = /[A-Z][a-z]+(\s|,)[A-Z][a-z]{1,50}/;
+      let messageArea = $("#messageArea").hide();
+      $("#fullName").on("blur", function()
+      {
+        if(!fullNamePattern.test($(this).val()))
+        {
+          $(this).trigger("focus").trigger("select");
+          messageArea.show().addClass("alert alert-danger").text("Please enter an appropriate Name. A first name and last name are required with a minimum length of 2 characters each.");
+        }
+        else
+        {
+            messageArea.removeAttr("class").hide();
+        }
+      });
+    }
+
+    function testContactNumber()
+    {
+      let contactNumberPattern = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+      let messageArea = $("#messageArea");
+      $("#contactNumber").on("blur", function()
+      {
+        if(!contactNumberPattern.test($(this).val()))
+        {
+          $(this).trigger("focus").trigger("select");
+          messageArea.show().addClass("alert alert-danger").text("Please enter a valid contact number.");
+        }
+        else
+        {
+            messageArea.removeAttr("class").hide();
+        }
+      });
+
+    }
+
+    function testEmailAddress()
+    {
+      let emailAddressPattern = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/;
+      let messageArea = $("#messageArea");
+      $("#emailAddress").on("blur", function()
+      {
+        if(!emailAddressPattern.test($(this).val()))
+        {
+          $(this).trigger("focus").trigger("select");
+          messageArea.show().addClass("alert alert-danger").text("Please enter a valid email address.");
+        }
+        else
+        {
+            messageArea.removeAttr("class").hide();
+        }
+      });
+    }
+
+    function formValidation()
+    {
+      testFullName();
+      testContactNumber();
+      testEmailAddress();
+    }
+
+    
+
     function displayContact()
     {
-      let messageArea = $("#messageArea").hide();
-
-        // form validation
-        $("#fullName").on("blur", function()
-        {
-          if($(this).val().length < 2)
-          {
-            $(this).trigger("focus").trigger("select");
-            messageArea.show().addClass("alert alert-danger").text("Please enter an appropriate Name");
-          }
-          else
-          {
-              messageArea.removeAttr("class").hide();
-          }
-        });
+      // form validation
+      formValidation();
 
         $("#sendButton").on("click", (event)=> 
         {
@@ -186,6 +237,9 @@
         // modify the edit button so that it shows "Add" as well as the appropriate icon
         $("#editButton").html(`<i class="fas fa-plus-circle fa-lg"></i> Add`);
       }
+
+      // form validation
+      formValidation();
 
       $("#editButton").on("click", function() 
       {
